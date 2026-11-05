@@ -54,24 +54,37 @@ class RepositoryList extends Component {
 
   render() {
     const loader = (
-      <div key={0} className="loader">
-        Loading...
+      <div key={0} className="loader" role="status">
+        <span className="spinner" aria-hidden="true" />
+        Loading more repositories…
       </div>
     );
 
     return (
-      <InfiniteScroll
-        pageStart={this.state.page}
-        loadMore={this.loadRepositories}
-        hasMore={this.state.hasMore}
-        loader={loader}
-      >
-        <Repository
-          repositories={this.state.repositories}
-          handleNumber={this.handleNumber}
-          handleDaysDifference={this.handleDaysDifference}
-        />
-      </InfiniteScroll>
+      <div className="page">
+        <header className="hero">
+          <p className="eyebrow">Created in the last 30 days</p>
+          <h1>Most starred repositories</h1>
+          <p className="hero-subtitle">
+            Discover the most starred new projects on GitHub. Select a
+            repository to open it on GitHub.
+          </p>
+        </header>
+        <main className="main">
+          <InfiniteScroll
+            pageStart={this.state.page}
+            loadMore={this.loadRepositories}
+            hasMore={this.state.hasMore}
+            loader={loader}
+          >
+            <Repository
+              repositories={this.state.repositories}
+              handleNumber={this.handleNumber}
+              handleDaysDifference={this.handleDaysDifference}
+            />
+          </InfiniteScroll>
+        </main>
+      </div>
     );
   }
 }
